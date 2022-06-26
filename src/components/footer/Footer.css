@@ -1,0 +1,89 @@
+.sign_in{
+	margin: 10px auto;
+	width: 250px;
+
+	
+}
+.sign_in >p {
+	text-align: center;
+}
+
+a{
+	text-decoration: none;
+
+}
+.sign_in .button{
+	background-color:#f0c14b;
+	width: 100%;
+	padding:8px 0;
+	border:1px solid;
+	margin-top: 10px;
+	margin-bottom: 5px;
+	border-color: darkgray;
+	color: #111;
+	cursor: pointer;
+	border-radius: 5px;
+}
+.sign_in p span{
+	color: #7568b3;
+	font-weight: 600;
+}
+.back_top button{
+	background-color: #1b1829;
+	width: 100%;
+	padding:15px 0;
+	border:1px solid;
+	margin-top: 10px;
+	border-color: darkgray;
+	color: #ccc;
+	font-weight: 500;
+	font-size: 17px;
+	cursor: pointer;
+	border-radius: 5px;
+}
+.features{
+	display: flex;
+	justify-content: space-around;
+	background-color: #110719;
+	color: white;
+	padding: 25px 0 0;
+	justify-content: center;
+}
+.features >div{
+	margin-right: 40px;
+}
+.features h4{
+	font-size: 18px;
+	text-transform: capitalize;
+	margin-bottom: 10px;
+}
+.features ul{
+	list-style-type:none;
+	 
+}
+.features ul li{
+	margin-bottom: 4px;
+}
+
+@media screen and (max-width: 500px){
+	.features{
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1rem;
+		padding: 0 5px;
+		width: 100%;
+		margin: 0 auto;
+		text-align: center;
+	}
+}
+
+@media screen and (max-width: 670px){
+	.features{
+		display: grid;
+		grid-template-columns:1fr 1fr;
+	}
+	.features >div{
+		margin-bottom: 20px;
+	}
+
+}
