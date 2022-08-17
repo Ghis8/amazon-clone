@@ -76,6 +76,12 @@
 @media screen and (max-width: 500px) {
 	.header{
 		width: 100%;
+		.amazon__logo{
+			width: 40px;
+		}
+	.amazon__logo{
+		display: none;
+	}
 	}
 	
 }
