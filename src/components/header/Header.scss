@@ -18,6 +18,10 @@
 		padding:10px;
 		border:none;
 		width: 100%;
+
+		&:focus{
+			outline: none;
+		}
 	}
 	img{
 		width:100px;
@@ -77,11 +81,19 @@
 	.header{
 		width: 100%;
 		.amazon__logo{
-			width: 40px;
+			width: 30px;
 		}
-	.amazon__logo{
-		display: none;
-	}
+		.header__search input{
+			display: none;
+		}
+		.header__searchIcon{
+			width: 8px;
+			height: 8px !important;
+		}
+		.header__option{
+			margin: 0 5px;
+		}
+	
 	}
 	
 }

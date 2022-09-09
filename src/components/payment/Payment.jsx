@@ -5,8 +5,10 @@ import CheckoutProduct from '../checkout/CheckoutProduct'
 import {Link,useNavigate} from 'react-router-dom'
 import {cardElement, useStripe, useElements} from '@stripe/react-stripe-js'
 import CurrencyFormat from 'react-currency-format'
+import StripeCheckout from 'react-stripe-checkout'
 import {getBasketTotal} from '../../reducer'
 import axios from '../../axios'
+import {toast} from 'react-toastify'
 
 
 
@@ -37,6 +39,8 @@ const Payment = () => {
 		getClientSecret() 
 	}, [basket])
 
+	console.log("The secret is>>>> ", clientSecret)
+
 	const handleSubmit=async (event) =>{
 		//Does  all stripe stuff 
 		event.preventDefault()
@@ -45,7 +49,7 @@ const Payment = () => {
 
 		const payload= await stripe.confirmCardPayment(clientSecret,{
 			payment__method:{
-				card:elements.getElement(cardElement)
+				card: elements.getElement(cardElement)
 			}
 		}).then(({paymentIntent})=>{
 			//paymentIntent =payment Confirmation
@@ -62,13 +66,17 @@ const Payment = () => {
 		setError(event.error ? event.error.message:"")
 	}
 
+	const handleToken=()=>{
+
+	}
+
 	return (
 		<div className="payment">
 			<div className="payment__container">
 				<h1>
 					Checkout (<Link to='/checkout'>{basket?.length} items</Link>)
 				</h1>
-				<div className="payment__section">
+				{/*<div className="payment__section">
 					<div className="payment__title">
 						<h3>Delivery Address</h3>
 					</div>
@@ -77,7 +85,7 @@ const Payment = () => {
 						<p>KG 679<sup>st</sup></p>
 						<p>Kigali, Rwanda</p>
 					</div>
-				</div>
+				</div>*/}
 
 				<div className="payment__section">
 					<div className="payment_title">
@@ -100,35 +108,21 @@ const Payment = () => {
 					<div className="payment__title">
 						<h3>Payment Method</h3>
 					</div>
-					<div className="payment__details">
-						{/*stripe will go here!*/}
-						<form action="" onSubmit={handleSubmit}>
-							<cardElement onChange={handleChange} />
-							<div className="payment__priceContainer">
-								<CurrencyFormat 
-									renderText={(value)=>(
-										
-											<p>
-												Order Total: <strong>{value}</strong>
-											</p>
-											
-										
-										)}
-									decimalScale={2}
-									value={getBasketTotal(basket)}
-									displayType={"text"}
-									thousandSeparator={true}
-									prefix={"$"}
-								/>
-								<button disabled={processing || disabled || succeeded}>
-									<span>{processing ? <p>Processing</p> : 'Buy Now'}</span>
-								</button>
-							</div>
-						{/*Error*/}
-						{error && <div>{error}</div>}
-						</form>
+					<div className="card-payment">
+						<p>Order Total: <strong>{`$ ${getBasketTotal(basket).toFixed(2)}`}</strong></p>
 
+						{getBasketTotal(basket).toFixed(2)>1 ? <StripeCheckout
+								className="paymentBtn"
+							 	stripekey='pk_test_51L3JipHBtTeyz9UPomiFC3XksdZNUNzg5ch4E3qhrCVhoryZY5IuioKXMCgRNcyyXFkKMtYpZjpA2SqA3drCUfj900dd4Pg1Xq'
+							 	token={handleToken}
+							 	bollingAddress
+							 	shippingAddress
+							 	amount={getBasketTotal(basket)*100}
+							 /> : <p style={{color:"gray"}}>Select an Item</p>}
+						
 					</div>
+					
+					
 				</div>
 			</div>
 			
